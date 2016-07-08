@@ -1,3 +1,8 @@
+1. Config master with NTP service
+2. Config minion with NTP client 
+3. Change time manually on master and see if time changes on the minion and vice versa
+4. Have NTP Autostart on boot
+
 #Source http://www.thegeekstuff.com/2014/06/linux-ntp-server-client/
 
 #Run this on the run on the server to check the status
@@ -15,7 +20,6 @@ iptables -X
 
 #Run this, will force a checkin to my NTP server
 ntpdate 10.33.1.109
-
 
 
 #I. Configure NTP server
@@ -64,12 +68,9 @@ After setting up appropriate values in the ntp.conf file, start the ntp service:
 service ntpd start
 
 
-
 You can also use the following command to get the current status of ntpd.
 
 # ntpdc -c sysinfo
-
-
 
 
 II. Configure NTP Client to Synchronize with NTP Server
@@ -90,7 +91,6 @@ Edit your NTP.conf to reflect appropriate entries for your own NTP server.
 server 19.168.1.1 prefer
 
 
-
 8. Start the NTP Daemon
 
 Once the ntp.conf is configured with correct settings, start the ntp daemon.
@@ -106,8 +106,6 @@ Check the status of NTP using the ntpq command. If you get any connection refuse
 # ntpq -p
 
 
-
-
 10. Set Local Date and Time
 
 The ntpdate command can be used to set the local date and time by polling the NTP server. Typically, you’ll have to do this only one time.
@@ -115,15 +113,3 @@ The ntpdate command can be used to set the local date and time by polling the NT
 Your jitter value should be low, else check the drift from the clock in the driftfile. You may also need to change to some other NTP server based on the difference. This command synchronizes the time with your NTP server manually.
 
 ntpdate 10.33.1.109
-
-
-
-
-
-#
-#
-#
-#
-#
-#
-#

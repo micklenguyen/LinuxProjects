@@ -1,0 +1,34 @@
+#Source http://www.thegeekstuff.com/2014/06/linux-ntp-server-client/
+
+#Run this on the run on the server to check the status
+ntpq -p
+
+#Make sure to clear firewall settings on the server
+
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -t nat -F
+iptables -t mangle -F
+iptables -F
+iptables -X
+
+#Run this, will force a checkin to my NTP server
+ntpdate 10.33.1.109
+
+
+
+#I. Configure NTP server
+
+1. yum install ntp
+2. 
+3. 
+
+
+#
+#
+#
+#
+#
+#
+#

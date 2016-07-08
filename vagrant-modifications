@@ -1,0 +1,49 @@
+1. set the background of the prompt of the master to red, for all users
+
+vi /etc/bashrc
+RED
+export  PS1="\[\e[30;41m\][\u@\h \W]\\$ \[\e[0m\] "
+
+
+2. set the background of the prompt of the minion to green, for all users
+
+vi /etc/bashrc
+Green
+
+export  PS1="\[\e[30;42m\][\u@\h \W]\\$\[\e[0m\] "
+
+By default the command prompt is set to [\u@\h \W]\$. The backslash-escaped special characters are decoded as follows:
+
+- \u: Display the current username .
+- \h: Display the hostname
+- \W: Print the base of current working directory.
+- \$: Display # (indicates root user) if the effective UID is 0, otherwise display a $.
+
+
+3. set the path for all users. the path can be arbitrary.
+
+Simply add
+cd /home
+to the end of .bashrc
+
+ /etc/bashrc
+
+
+
+4.[x] set the motd for all users
+
+Display SSH Warning Message to Users Before Login
+1. vi /etc/issue.net
+2. vi /etc/ssh/sshd_config
+3. Uncomment #Banner /some/path
+
+Display SSH  Message to Users After Login
+1. vi /etc/motd
+
+http://www.tecmint.com/protect-ssh-logins-with-ssh-motd-banner-messages/
+
+Example change color of bash prompt
+
+http://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
+
+Clone security_poc from git / OKL

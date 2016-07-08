@@ -113,3 +113,12 @@ The ntpdate command can be used to set the local date and time by polling the NT
 Your jitter value should be low, else check the drift from the clock in the driftfile. You may also need to change to some other NTP server based on the difference. This command synchronizes the time with your NTP server manually.
 
 ntpdate 10.33.1.109
+
+
+
+#Enable NTP to start on boot
+systemctl enable ntp.service
+systemctl enable ntpdate.service
+
+#shows the services that are enabled or disabled for booting
+systemctl list-unit-files

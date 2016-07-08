@@ -20,9 +20,104 @@ ntpdate 10.33.1.109
 
 #I. Configure NTP server
 
-1. yum install ntp
-2. 
-3. 
+  1. yum install ntp
+  2. Setup Restrict values in ntp.conf
+  
+  Modify the /etc/ntp.conf file to make sure it has the following two restrict lines.
+
+# Permit time synchronization with our time source, but do not
+# permit the source to query or modify the service on this system.
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+The first restrict line allows other clients to query your time server. This restrict line has the following parameters
+
+  3. Allow Only Specific Clients
+
+To only allow machines on your own network to synchronize with your NTP server, add the following restrict line to your /etc/ntp.conf file:
+
+restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
+If the localhost needs to have the full access to query or modify, add the following line to /etc/ntp.conf
+
+restrict 127.0.0.1
+
+
+  4. Add Local Clock as Backup
+
+Add the local clock to the ntp.conf file so that if the NTP server is disconnected from the internet, NTP server provides time from its local system clock.
+
+server  127.127.1.0 # local clock
+fudge   127.127.1.0 stratum 10
+
+5. Setup NTP Log Parameters
+
+Specify the drift file and the log file location in your ntp.conf file
+
+driftfile /var/lib/ntp/ntp.drift
+logfile /var/log/ntp.log
+driftfile is used to log how far your clock is from what it should be, and slowly ntp should lower this value as time progress.
+
+
+6. Start the NTP Serrver
+
+After setting up appropriate values in the ntp.conf file, start the ntp service:
+
+service ntpd start
+
+
+
+You can also use the following command to get the current status of ntpd.
+
+# ntpdc -c sysinfo
+
+
+
+
+II. Configure NTP Client to Synchronize with NTP Server
+
+7. Modify ntp.conf on NTP Client
+
+This setup should be done on your NTP Client (Not on NTP-server)
+
+To synchronize the time of your local Linux client machine with NTP server, edit the /etc/ntp.conf file on the client side. Here is an example of how the sample entries looks like. In the following example, you are specifying multiple servers to act as time server, which is helpful when one of the timeservers fails.
+
+server 0.rhel.pool.ntp.org iburst 
+server 1.rhel.pool.ntp.org iburst 
+server 2.rhel.pool.ntp.org iburst 
+server 3.rhel.pool.ntp.org iburst
+
+Edit your NTP.conf to reflect appropriate entries for your own NTP server.
+
+server 19.168.1.1 prefer
+
+
+
+8. Start the NTP Daemon
+
+Once the ntp.conf is configured with correct settings, start the ntp daemon.
+
+/etc/init.d/ntp start
+You will see the NTP will slowly start to synchronize the time of your linux machine with the NTP Server.
+
+
+9. Check the NTP Status
+
+Check the status of NTP using the ntpq command. If you get any connection refused errors then the time server is not responding or the NTP daemon/port is not started or listening.
+
+# ntpq -p
+
+
+
+
+10. Set Local Date and Time
+
+The ntpdate command can be used to set the local date and time by polling the NTP server. Typically, you’ll have to do this only one time.
+
+Your jitter value should be low, else check the drift from the clock in the driftfile. You may also need to change to some other NTP server based on the difference. This command synchronizes the time with your NTP server manually.
+
+ntpdate 10.33.1.109
+
+
+
 
 
 #

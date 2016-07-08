@@ -1,0 +1,75 @@
+Vagrant Installation Notes
+
+1. clone eng-tools https://github.com/okl/eng-tools
+2. cd to /Users/mbills/git/eng-tools/vagrant
+3. vagrant up master (for linux) 
+4. vagrant ssh minion
+5. run ./vagrant_bootstrap.sh (Mac specific script) 
+6. vboxmanage hostonlyif create
+7. vboxmanage hostonlyif ipconfig vboxnet0 --ip 192.168.33.1
+8. cd /tmp/vagrant_salt_test.5FkNb/
+9. vagrant ssh master
+10. sudo su -
+11. test to see if you can ping from the master to the minion salt '*' test.ping 
+
+
+
+
+Study this VIA JSON 
+https://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html
+
+
+Accepting Salt-Keys from the master
+2.  salt-key -L  - List all keys (attempted)
+4.  salt-key -A  - Accept All keys
+5.  salt-key -D Delete keys, this is good to use if you find you can’t connect to your master
+
+
+shows all the services on the system and of they are running centos 7 and above 
+
+systemctl list-unit-files --type=service   Shows whats installed  
+
+
+Check to see if the salt service is running 
+systemctl status salt-minion.service 
+
+
+
+will show a full list of services running 
+ps -aux 
+
+
+SSH into the minion / master
+vagrant ssh minion /  master 
+
+
+lsof -i -n -P
+
+
+
+Good Read on lsof 
+http://www.thegeekstuff.com/2012/08/lsof-command-examples/
+
+list open files, list of all open files and the processes that opened them. Since everything on Linux is considered a file the -i  option will list all network connections. 
+
+-i 
+selects the listing of files any of whose Internet address matches the address specified in i.  If no address is specified, this option selects the listing of all Internet and  x.25  (HP-UX)
+                network files.
+
+
+-n 
+inhibits  the  conversion of network numbers to host names for network files.  Inhibiting con‐
+                version may make lsof run faster.  It is also useful when host  name  lookup  is  not  working
+                properly.
+
+
+-P
+inhibits  the conversion of port numbers to port names for network files.  Inhibiting the con‐
+                version may make lsof run a little faster.  It is also useful when port  name  lookup  is  not
+                working properly.
+
+
+Shows Firewall Rules 
+Good to use when troubleshooting issues connection to your master. this will show if any rules are in place to block  that connection 
+
+iptables -L -v -n 

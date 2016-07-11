@@ -122,3 +122,6 @@ systemctl enable ntpdate.service
 
 #shows the services that are enabled or disabled for booting
 systemctl list-unit-files
+
+#Check which network ports are running for services
+lsof -i | grep ntp

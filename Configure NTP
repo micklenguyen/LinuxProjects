@@ -125,3 +125,7 @@ systemctl list-unit-files
 
 #Check which network ports are running for services
 lsof -i | grep ntp
+# Settting the time zone on your machine
+timedatectl list-timezones 
+timedatectl set-timezone America/Chicago 
+

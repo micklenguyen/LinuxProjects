@@ -129,3 +129,6 @@ lsof -i | grep ntp
 timedatectl list-timezones 
 timedatectl set-timezone America/Chicago 
 
+
+# Set time and date
+timedatectl set-time 'YYYY-MM-DD HH:MM:SS'

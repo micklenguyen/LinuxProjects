@@ -1,0 +1,12 @@
+# Requirements
+1. Configure/Setup Apache
+2. Install/Start Apache
+3. Configure Apache to serve web content from all home directories
+4. Create "Hello World" page for 2 users
+5.  Startup Apache at boot
+6. Configure Apache to run on port 8080
+7. Run Apache not as root, but as a different user.
+
+
+#Sources
+http://www.tecmint.com/apache-interview-questions/

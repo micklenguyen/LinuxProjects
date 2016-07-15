@@ -3,10 +3,29 @@
 2. Install/Start Apache
 3. Configure Apache to serve web content from all home directories
 4. Create "Hello World" page for 2 users
-5.  Startup Apache at boot
+5. Startup Apache at boot
 6. Configure Apache to run on port 8080
 7. Run Apache not as root, but as a different user.
 
 
 #Sources
 http://www.tecmint.com/apache-interview-questions/
+
+
+#Apache Config File
+/etc/httpd/conf/httpd.conf 
+
+#Changing the Listening Port
+Listen8080
+
+
+# Add a user to a group
+usermod -a -G <groupname> username
+
+#Removing user apache from group web
+# gpasswd -d user group
+gpasswd -d apache web
+
+#Run Apache not as root, but as a different user.
+Add user kamryn to /etc/httpd/conf/httpd.conf
+User kamryn

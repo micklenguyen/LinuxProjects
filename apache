@@ -6,6 +6,7 @@
 5. Startup Apache at boot
 6. Configure Apache to run on port 8080
 7. Run Apache not as root, but as a different user.
+8. Start the HTTPD parent process  as not root
 
 
 #Sources

@@ -31,5 +31,14 @@ gpasswd -d apache web
 Add user kamryn to /etc/httpd/conf/httpd.conf
 User kamryn
 
-#4 is now completed, however I don't think this is the proper way to do it, this will be adressed
+# I am also hosting multile sites from /var/www/html/site*
 #Site 1 and Site 2 are both hosting web content, the files are located in /var/www/html site1 site 2 folders
+
+#4 Updates on #4, I think I have done it correctly now
+  inside the /etc/httpd/conf.d you have to edit the userdir.conf
+    # To enable requests to /~user/ to serve the user's public_html
+    # directory, remove the "UserDir disabled" line above, and uncomment
+    # the following line instead:
+    #UserDir public_html
+Permissions Source 
+http://www.tuxradar.com/answers/457

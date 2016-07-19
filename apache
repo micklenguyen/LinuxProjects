@@ -6,7 +6,7 @@
 5. Startup Apache at boot
 6. Configure Apache to run on port 8080
 7. Run Apache not as root, but as a different user.
-8. Start the HTTPD parent process  as not root
+8. Start the HTTPD parent process as another user (not root) on port 80
 
 
 #Sources
@@ -30,3 +30,6 @@ gpasswd -d apache web
 #Run Apache not as root, but as a different user.
 Add user kamryn to /etc/httpd/conf/httpd.conf
 User kamryn
+
+#4 is now completed, however I don't think this is the proper way to do it, this will be adressed
+#Site 1 and Site 2 are both hosting web content, the files are located in /var/www/html site1 site 2 folders

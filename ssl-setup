@@ -1,0 +1,45 @@
+1. Install/Enable SSL
+2. Enable SSL with a passphrase
+3. Disable the RC4 ciphers
+4. Find a command line utility that will enable you from your minion to connect to your master to verify the ciphers that you have disabled have actually been disabled 
+5. Create a certificate in D.E.R format and try to make it work. Then convert the certificate back to PEM
+6. Make it so the client browser trusts the certificate of the server 
+7. Create a pkcs12 bundle for someone else and distribute it to them
+
+
+Source FIle
+https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-apache-for-centos-7
+
+1. Install/Enable SSL
+  openssl is already baked into the OS of Centos
+  
+2. Enable SSL with a passphrase
+
+Drop the -nodes flag
+-nodes: This tells OpenSSL to skip the option to secure our certificate with a passphrase. We need Apache to be able to read the file, without user intervention, when the server starts up. A passphrase would prevent this from happening, since we would have to enter it after every restart.
+
+
+3. Disable the RC4 ciphers
+  # This will show you which ciphers are being used by your server
+  $ openssl ciphers -V
+  # You have to look in the SSLCipherSuite section of the ssl.conf file and add !RC4
+  $ /etc/httpd/conf.d/ssl.conf
+
+  
+  4. Find a command line utility that will enable you from your minion to connect to your master to verify the ciphers that you have disabled have actually been disabled 
+      # This is the closest I got to testing if the RC4 ciphers were disabled
+      $ nmap --script ssl-cert,ssl-enum-ciphers -p 443 127.0.0.1 | grep RC4
+
+5. Create a certificate in D.E.R format and try to make it work. Then convert the certificate back to PEM
+
+
+
+6. Make it so the client browser trusts the certificate of the server 
+
+
+
+
+
+7. Create a pkcs12 bundle for someone else and distribute it to them
+
+  

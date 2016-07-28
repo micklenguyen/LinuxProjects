@@ -10,13 +10,25 @@
 Source FIle
 https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-apache-for-centos-7
 
-1. Install/Enable SSL
-  openssl is already baked into the OS of Centos
+1. Install / Enable SSL
+  # openssl is already baked into the OS of Centos
+ 
+  # Install Mod SSL, mod_ssl, is an Apache module that provides support for SSL encryption
+  $ sudo yum install mod_ssl
   
 2. Enable SSL with a passphrase
 
 Drop the -nodes flag
 -nodes: This tells OpenSSL to skip the option to secure our certificate with a passphrase. We need Apache to be able to read the file, without user intervention, when the server starts up. A passphrase would prevent this from happening, since we would have to enter it after every restart.
+
+# First, we need to create a new directory where we will store the server key and certificate:
+$ sudo mkdir /etc/httpd/ssl
+
+
+# We can create the SSL key and certificate files with openssl:
+
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/httpd/ssl/apache.key -out /etc/httpd/ssl/apache.crt
+
 
 
 3. Disable the RC4 ciphers

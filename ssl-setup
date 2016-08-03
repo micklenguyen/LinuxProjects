@@ -6,6 +6,8 @@
 6. Make it so the client browser trusts the certificate (PEM) of the server 
 7. Create a pkcs12 bundle for someone else and distribute it to them
 
+# https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
+
 
 Source FIle
 https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-apache-for-centos-7
@@ -60,9 +62,12 @@ $ sudo mkdir /etc/httpd/ssl
 
 6. Make it so the client browser trusts the certificate (PEM) of the server 
 
-  # To make the website trust it is another issue
-  # I'm assuming this process means have the browser trust the newly converted certificate from  DER to PEM format. 
-
+  # This ask is saying have the local browser trust your certificate to where it displays the green keypad
+  # in the browser bar. This can be accomplished by adding your certificate to your local certificate store
+  # on mac OS this can be imported into the keychain database   
+    
+  # copy the certificate from Linux to the Mac
+  $ scp mbills@10.33.0.147:/etc/httpd/ssl/apache* ~/Desktop/
 
 
 
